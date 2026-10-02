@@ -93,6 +93,17 @@
   background: white;
 }
 
+.pay-field input:read-only {
+  background: #f4f5f7;
+  color: #495057;
+  cursor: default;
+}
+
+.pay-field input:read-only:focus {
+  border-color: #ddd;
+  background: #f4f5f7;
+}
+
 .pay-field input.error,
 .pay-field select.error {
   border-color: #e53935;

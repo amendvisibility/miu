@@ -44,7 +44,16 @@ export default function PaymentFailed() {
         </p>
 
         <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/payonline" className="pay-result-btn">Try Again</Link>
+          <Link
+            href={
+              params.productinfo?.toLowerCase().includes("seminar")
+                ? "/pay-for-seminar"
+                : "/payonline"
+            }
+            className="pay-result-btn"
+          >
+            Try Again
+          </Link>
           <Link href="/" className="pay-result-btn pay-result-btn-outline">Return to Home</Link>
         </div>
       </div>

@@ -200,6 +200,10 @@ const navbarItems = [
     href: "/payonline",
   },
   {
+    label: "Pay for Seminar",
+    href: "/pay-for-seminar",
+  },
+  {
     label: "Contact Us",
     href: "/contact",
   },
