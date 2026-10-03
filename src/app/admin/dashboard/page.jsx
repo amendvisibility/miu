@@ -120,6 +120,16 @@ const Dashboard = () => {
             <p>Review, shortlist and manage career applications.</p>
           </Link>
 
+          <Link
+            href="/admin/change-password"
+            className="admin-card"
+            style={cardStyle}
+          >
+            <div style={{ fontSize: "3rem", marginBottom: "15px" }}>🔑</div>
+            <h3>Change Password</h3>
+            <p>Update your admin account password securely.</p>
+          </Link>
+
           {/* <Link href="/admin/pages" className="admin-card" style={cardStyle}>
             <div style={{ fontSize: "3rem", marginBottom: "15px" }}>📄</div>
             <h3>Page Content</h3>
