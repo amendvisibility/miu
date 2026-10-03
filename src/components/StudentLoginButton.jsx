@@ -15,6 +15,19 @@ const StudentLoginButton = () => {
           </button>
         </a>
       </div>
+
+      <div className="student-login-wrapper">
+        <a
+          href="https://student.miu.edu.in/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button className="student-login-button">
+             Test 
+          </button>
+        </a>
+      </div>
+
       {/* Apply Now */}
       <div className="apply-now-wrapper">
         <a
