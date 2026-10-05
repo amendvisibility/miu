@@ -73,10 +73,8 @@ export const metadata = {
   },
   alternates: {
     canonical: "https://miu.edu.in",
-  },
-  verification: {
-    google: "XP8pdLn7lfNrv5b-6sttVAeGaD4bWavSjhrBWYEGVns",
-  },
+  }
+  
 };
 
 export default function RootLayout({ children }) {
@@ -89,10 +87,7 @@ export default function RootLayout({ children }) {
           content="width=device-width, initial-scale=1, maximum-scale=5"
         />
 
-        <meta
-          name="google-site-verification"
-          content="XP8pdLn7lfNrv5b-6sttVAeGaD4bWavSjhrBWYEGVns"
-        />
+        
 
         <meta
           name="facebook-domain-verification"
