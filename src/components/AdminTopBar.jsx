@@ -27,10 +27,13 @@ const AdminTopBar = () => {
     { href: "/admin/faq", label: "❓Faq" },
     { href: "/admin/content", label: "🖼️ Content" },
     // { href: "/admin/pages", label: "📄 Pages" },
-    // { href: "/admin/seo", label: "🔍 SEO" },
     {
       href: "/admin/notice-and-announcement",
       label: "📢 Notice & Announcement",
+    },
+    {
+      href: "/admin/change-password",
+      label: "🔑 Change Password",
     },
   ];
 
