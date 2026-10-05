@@ -1,334 +1,375 @@
+
 const BASE_URL = "https://miu.edu.in";
 
-// Revalidate the sitemap route itself at most once per hour.
-// This is a route segment config (App Router), separate from the
-// per-fetch `next.revalidate` options below.
 export const revalidate = 3600;
 
-const VALID_CHANGE_FREQUENCIES = new Set([
-  "always",
-  "hourly",
-  "daily",
-  "weekly",
-  "monthly",
-  "yearly",
-  "never",
-]);
-
-// A stable "site content last touched" date for static pages that have no
-// real per-page modification date available. Using a fixed date (rather
-// than `new Date()` evaluated on every regeneration) avoids falsely
-// signalling to crawlers that every static page changes every hour.
-// Update this manually when you make a meaningful content pass over the
-// static pages, or wire it up to your CMS/deploy metadata if available.
-const STATIC_CONTENT_LAST_MODIFIED = "2025-01-01T00:00:00.000Z";
+const STATIC_LAST_MODIFIED = "2025-01-01T00:00:00.000Z";
 
 const staticRoutes = [
+  // Home
   { path: "", priority: 1.0, changeFrequency: "daily" },
 
   // About
   { path: "/about", priority: 0.9, changeFrequency: "weekly" },
-  { path: "/about/governance", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/about/governance", priority: 0.8 },
+  { path: "/about/academic-council", priority: 0.8 },
+  { path: "/about/iqac", priority: 0.8 },
+  { path: "/about/affiliations-accreditation", priority: 0.8 },
+  { path: "/about/public-self-disclosure", priority: 0.8 },
+  { path: "/about/ugc-performa", priority: 0.7 },
+  { path: "/about/faqs", priority: 0.6 },
+
+  // Leadership
+  { path: "/about/leadership", priority: 0.8 },
+  { path: "/about/leadership/chancellor", priority: 0.8 },
+  { path: "/about/leadership/vice-chancellor", priority: 0.8 },
+  { path: "/about/leadership/registrar", priority: 0.8 },
   {
-    path: "/about/academic-council",
+    path: "/about/leadership/controller-of-examinations",
     priority: 0.8,
-    changeFrequency: "monthly",
   },
-  { path: "/about/iqac", priority: 0.8, changeFrequency: "monthly" },
-  {
-    path: "/about/affiliations-accreditation",
-    priority: 0.8,
-    changeFrequency: "monthly",
-  },
-  {
-    path: "/about/public-self-disclosure",
-    priority: 0.8,
-    changeFrequency: "monthly",
-  },
-  { path: "/about/ugc-performa", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/about/leadership", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/about/faqs", priority: 0.6, changeFrequency: "monthly" },
 
   // Admissions
-  { path: "/admissions", priority: 0.9, changeFrequency: "weekly" },
   {
-    path: "/admissions/process",
-    priority: 0.8,
-    changeFrequency: "monthly",
+    path: "/admissions",
+    priority: 0.9,
+    changeFrequency: "weekly",
   },
-  {
-    path: "/admissions/fee-structure",
-    priority: 0.8,
-    changeFrequency: "monthly",
-  },
-  { path: "/admissions/rules", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/admissions/process", priority: 0.8 },
+  { path: "/admissions/fee-structure", priority: 0.8 },
+  { path: "/admissions/rules", priority: 0.7 },
 
   // Academics
-  {
-    path: "/academics/academic-calendar",
-    priority: 0.7,
-    changeFrequency: "monthly",
-  },
-  { path: "/academics/brochure", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/academics/academic-calendar", priority: 0.7 },
+  { path: "/academics/brochure", priority: 0.7 },
 
   // Examination
-  // { path: "/examination", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/examination/results", priority: 0.8 },
 
   // Research
-  {
-    path: "/research/overview",
-    priority: 0.7,
-    changeFrequency: "monthly",
-  },
-  {
-    path: "/research/publications",
-    priority: 0.7,
-    changeFrequency: "monthly",
-  },
-  { path: "/research/projects", priority: 0.7, changeFrequency: "monthly" },
-  {
-    path: "/research/development-cell",
-    priority: 0.6,
-    changeFrequency: "monthly",
-  },
-  {
-    path: "/research/degree-awarded",
-    priority: 0.6,
-    changeFrequency: "monthly",
-  },
+  { path: "/research/overview", priority: 0.8 },
+  { path: "/research/publications", priority: 0.8 },
+  { path: "/research/projects", priority: 0.8 },
+  { path: "/research/development-cell", priority: 0.6 },
+  { path: "/research/degree-awarded", priority: 0.6 },
 
   // Student Life
-  {
-    path: "/student-life/sports",
-    priority: 0.6,
-    changeFrequency: "monthly",
-  },
-  {
-    path: "/student-life/hostel",
-    priority: 0.6,
-    changeFrequency: "monthly",
-  },
-  {
-    path: "/student-life/anti-ragging",
-    priority: 0.6,
-    changeFrequency: "monthly",
-  },
-  {
-    path: "/student-life/grievance-cell",
-    priority: 0.6,
-    changeFrequency: "monthly",
-  },
-  // {
-  //   path: "/student-life/ncc-nss",
-  //   priority: 0.6,
-  //   changeFrequency: "monthly",
-  // },
-  { path: "/student-life/icc", priority: 0.6, changeFrequency: "monthly" },
-  {
-    path: "/student-life/health-facilities",
-    priority: 0.6,
-    changeFrequency: "monthly",
-  },
-  { path: "/student-life/awards", priority: 0.6, changeFrequency: "monthly" },
-  { path: "/student-life/cpio", priority: 0.5, changeFrequency: "monthly" },
-  {
-    path: "/student-life/equal-opportunity-cell",
-    priority: 0.5,
-    changeFrequency: "monthly",
-  },
-  // {
-  //   path: "/student-life/incubation-center",
-  //   priority: 0.6,
-  //   changeFrequency: "monthly",
-  // },
-  {
-    path: "/student-life/ombudsperson",
-    priority: 0.5,
-    changeFrequency: "monthly",
-  },
+  { path: "/student-life/sports", priority: 0.6 },
+  { path: "/student-life/hostel", priority: 0.6 },
+  { path: "/student-life/anti-ragging", priority: 0.6 },
+  { path: "/student-life/grievance-cell", priority: 0.6 },
+  { path: "/student-life/icc", priority: 0.6 },
+  { path: "/student-life/health-facilities", priority: 0.6 },
+  { path: "/student-life/awards", priority: 0.6 },
+  { path: "/student-life/cpio", priority: 0.5 },
+  { path: "/student-life/equal-opportunity-cell", priority: 0.5 },
+  { path: "/student-life/ombudsperson", priority: 0.5 },
   {
     path: "/student-life/project-development-cell",
     priority: 0.5,
-    changeFrequency: "monthly",
   },
-  {
-    path: "/student-life/sedg-cell",
-    priority: 0.5,
-    changeFrequency: "monthly",
-  },
+  { path: "/student-life/sedg-cell", priority: 0.5 },
 
-  // Miscellaneous
+  // Notices
   {
     path: "/notices-and-announcements",
     priority: 0.8,
     changeFrequency: "daily",
   },
-  { path: "/contact", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/jobs", priority: 0.7, changeFrequency: "weekly" },
-  { path: "/blogs", priority: 0.8, changeFrequency: "daily" },
-  { path: "/miunest", priority: 0.7, changeFrequency: "monthly" },
-  // { path: "/miu-cell", priority: 0.6, changeFrequency: "monthly" },
-  // { path: "/apprenticeship", priority: 0.6, changeFrequency: "monthly" },
+
+  // Contact and Jobs
+  { path: "/contact", priority: 0.8 },
   {
-    path: "/reservation-roster",
-    priority: 0.6,
-    changeFrequency: "monthly",
+    path: "/jobs",
+    priority: 0.8,
+    changeFrequency: "weekly",
   },
-  // {
-  //   path: "/credit-transfer-policy",
-  //   priority: 0.5,
-  //   changeFrequency: "yearly",
-  // },
-  { path: "/refund-policy", priority: 0.5, changeFrequency: "yearly" },
-  { path: "/privacy-policy", priority: 0.5, changeFrequency: "yearly" },
-  { path: "/terms-of-use", priority: 0.5, changeFrequency: "yearly" },
-  { path: "/student-login", priority: 0.4, changeFrequency: "monthly" },
-  { path: "/blogs", priority: 0.4, changeFrequency: "weekly" },
+
+  // Blogs
+  {
+    path: "/blogs",
+    priority: 0.8,
+    changeFrequency: "daily",
+  },
+
+  // Other Pages
+  { path: "/miunest", priority: 0.8 },
+  { path: "/reservation-roster", priority: 0.6 },
+  { path: "/refund-policy", priority: 0.5 },
+  { path: "/privacy-policy", priority: 0.5 },
+  { path: "/terms-of-use", priority: 0.5 },
 ];
 
-/**
- * Safely joins the base URL with a path/slug segment and percent-encodes
- * it, guarding against spaces, unicode characters, or stray query-breaking
- * characters producing an invalid <loc> entry.
- */
-function buildUrl(pathOrSegments) {
-  const cleanPath = Array.isArray(pathOrSegments)
-    ? pathOrSegments
-        .map((segment) => encodeURIComponent(String(segment).trim()))
-        .join("/")
-    : String(pathOrSegments)
-        .split("/")
-        .map((segment) => (segment ? encodeURIComponent(segment) : segment))
-        .join("/");
+// ---------------------------------------------
+// URL HELPERS
+// ---------------------------------------------
 
-  return `${BASE_URL}${cleanPath.startsWith("/") ? "" : "/"}${cleanPath}`;
+function buildUrl(path = "") {
+  const segments = String(path)
+    .split("/")
+    .filter(Boolean)
+    .map((segment) => {
+      try {
+        return encodeURIComponent(
+          decodeURIComponent(segment)
+        );
+      } catch {
+        return encodeURIComponent(segment);
+      }
+    });
+
+  if (segments.length === 0) {
+    return `${BASE_URL}/`;
+  }
+
+  return `${BASE_URL}/${segments.join("/")}`;
 }
 
-/** Clamps a priority value into the valid Sitemap Protocol range of 0.0–1.0. */
-function clampPriority(priority) {
-  if (typeof priority !== "number" || Number.isNaN(priority)) return 0.5;
-  return Math.min(1, Math.max(0, priority));
-}
-
-/** Ensures changeFrequency is one of the values the Sitemap Protocol allows. */
-function safeChangeFrequency(freq) {
-  return VALID_CHANGE_FREQUENCIES.has(freq) ? freq : "monthly";
-}
-
-/** Converts any date-ish value into a valid ISO string, with a safe fallback. */
 function safeDate(value) {
-  if (!value) return new Date().toISOString();
-  const d = new Date(value);
-  return Number.isNaN(d.getTime()) ? new Date().toISOString() : d.toISOString();
+  if (!value) return undefined;
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return undefined;
+  }
+
+  return date.toISOString();
 }
+
+function createEntry({
+  path,
+  lastModified,
+  priority = 0.5,
+  changeFrequency = "monthly",
+}) {
+  const entry = {
+    url: buildUrl(path),
+    changeFrequency,
+    priority,
+  };
+
+  const validDate = safeDate(lastModified);
+
+  if (validDate) {
+    entry.lastModified = validDate;
+  }
+
+  return entry;
+}
+
+// ---------------------------------------------
+// API FETCH HELPER
+// ---------------------------------------------
 
 async function fetchJson(
   path,
-  { timeoutMs = 10000, revalidateSeconds = 3600 } = {},
+  {
+    timeoutMs = 10000,
+    revalidateSeconds = 3600,
+  } = {}
 ) {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, timeoutMs);
 
   try {
-    const res = await fetch(`${BASE_URL}${path}`, {
-      next: { revalidate: revalidateSeconds },
-      signal: controller.signal,
-    });
+    const response = await fetch(
+      `${BASE_URL}${path}`,
+      {
+        next: {
+          revalidate: revalidateSeconds,
+        },
+        signal: controller.signal,
+      }
+    );
 
-    if (!res.ok) {
-      throw new Error(`Request to ${path} failed with status ${res.status}`);
+    if (!response.ok) {
+      throw new Error(
+        `API ${path} returned ${response.status}`
+      );
     }
 
-    return await res.json();
+    return await response.json();
   } finally {
     clearTimeout(timeout);
   }
 }
 
+// ---------------------------------------------
+// DYNAMIC SCHOOLS
+// ---------------------------------------------
+
 async function getSchoolRoutes() {
   try {
-    const data = await fetchJson("/api/settings/schools-section");
+    const data = await fetchJson(
+      "/api/settings/schools-section"
+    );
+
     const schools = data?.content?.schools;
 
     if (!Array.isArray(schools)) {
-      console.error("Sitemap: schools response was not an array, skipping.");
+      console.error(
+        "Sitemap: Invalid schools API response"
+      );
       return [];
     }
 
     return schools
-      .filter((school) => Boolean(school?.slug))
-      .map((school) => ({
-        url: buildUrl(["schools", school.slug]),
-        lastModified: safeDate(school.updatedAt),
-        changeFrequency: "monthly",
-        priority: 0.8,
-      }));
+      .filter((school) => school?.slug)
+      .map((school) =>
+        createEntry({
+          path: `/schools/${school.slug}`,
+          lastModified: school.updatedAt,
+          priority: 0.8,
+          changeFrequency: "monthly",
+        })
+      );
   } catch (error) {
-    console.error("Sitemap: error fetching schools:", error);
+    console.error(
+      "Sitemap: Schools fetch failed:",
+      error
+    );
+
     return [];
   }
 }
+
+// ---------------------------------------------
+// DYNAMIC COURSES
+// ---------------------------------------------
 
 async function getCourseRoutes() {
   try {
-    const courses = await fetchJson("/api/courses");
+    const data = await fetchJson("/api/courses");
 
-    if (!Array.isArray(courses)) {
-      console.error("Sitemap: courses response was not an array, skipping.");
+    if (!Array.isArray(data)) {
+      console.error(
+        "Sitemap: Invalid courses API response"
+      );
+
       return [];
     }
 
-    return courses
-      .filter((course) => Boolean(course?.slug))
-      .map((course) => ({
-        url: buildUrl(["courses", course.slug]),
-        lastModified: safeDate(course.updatedAt),
-        changeFrequency: "weekly",
-        priority: 0.8,
-      }));
+    return data
+      .filter((course) => course?.slug)
+      .map((course) =>
+        createEntry({
+          path: `/courses/${course.slug}`,
+          lastModified: course.updatedAt,
+          priority: 0.64,
+          changeFrequency: "weekly",
+        })
+      );
   } catch (error) {
-    console.error("Sitemap: error fetching courses:", error);
+    console.error(
+      "Sitemap: Courses fetch failed:",
+      error
+    );
+
     return [];
   }
 }
+
+// ---------------------------------------------
+// DYNAMIC BLOGS
+// ---------------------------------------------
 
 async function getBlogRoutes() {
   try {
-    const blogs = await fetchJson("/api/blogs");
+    const data = await fetchJson("/api/blogs");
 
-    if (!Array.isArray(blogs)) {
-      console.error("Sitemap: blogs response was not an array, skipping.");
+    if (!Array.isArray(data)) {
+      console.error(
+        "Sitemap: Invalid blogs API response"
+      );
+
       return [];
     }
 
-    return blogs
-      .filter((blog) => Boolean(blog?.slug))
-      .map((blog) => ({
-        url: buildUrl(["blogs", blog.slug]),
-        lastModified: safeDate(blog.updatedAt),
-        changeFrequency: "weekly",
-        priority: 0.8,
-      }));
+    return data
+      .filter((blog) => blog?.slug)
+      .map((blog) =>
+        createEntry({
+          path: `/blogs/${blog.slug}`,
+          lastModified: blog.updatedAt,
+          priority: 0.64,
+          changeFrequency: "weekly",
+        })
+      );
   } catch (error) {
-    console.error("Sitemap: error fetching blogs:", error);
+    console.error(
+      "Sitemap: Blogs fetch failed:",
+      error
+    );
+
     return [];
   }
 }
 
-/** @type {() => Promise<import('next').MetadataRoute.Sitemap>} */
-export default async function sitemap() {
-  const staticEntries = staticRoutes.map((route) => ({
-    url: buildUrl(route.path),
-    lastModified: STATIC_CONTENT_LAST_MODIFIED,
-    changeFrequency: safeChangeFrequency(route.changeFrequency),
-    priority: clampPriority(route.priority),
-  }));
+// ---------------------------------------------
+// REMOVE DUPLICATE URLS
+// ---------------------------------------------
 
-  const [schoolEntries, courseEntries, blogEntries] = await Promise.all([
+function removeDuplicates(entries) {
+  const uniqueEntries = new Map();
+
+  for (const entry of entries) {
+    if (!entry?.url) continue;
+
+    const normalizedUrl =
+      entry.url === `${BASE_URL}/`
+        ? entry.url
+        : entry.url.replace(/\/+$/, "");
+
+    if (!uniqueEntries.has(normalizedUrl)) {
+      uniqueEntries.set(normalizedUrl, {
+        ...entry,
+        url: normalizedUrl,
+      });
+    }
+  }
+
+  return Array.from(uniqueEntries.values());
+}
+
+// ---------------------------------------------
+// GENERATE SITEMAP
+// ---------------------------------------------
+
+/** @type {() => Promise<import('next').MetadataRoute.Sitemap>} */
+
+export default async function sitemap() {
+  // Generate static URLs
+  const staticEntries = staticRoutes.map(
+    (route) =>
+      createEntry({
+        ...route,
+        lastModified: STATIC_LAST_MODIFIED,
+      })
+  );
+
+  // Fetch dynamic URLs
+  const [
+    schoolEntries,
+    courseEntries,
+    blogEntries,
+  ] = await Promise.all([
     getSchoolRoutes(),
     getCourseRoutes(),
     getBlogRoutes(),
   ]);
 
-  return [...staticEntries, ...schoolEntries, ...courseEntries, ...blogEntries];
+  // Combine all entries
+  const allEntries = [
+    ...staticEntries,
+    ...schoolEntries,
+    ...courseEntries,
+    ...blogEntries,
+  ];
+
+  // Return unique sitemap URLs
+  return removeDuplicates(allEntries);
 }
