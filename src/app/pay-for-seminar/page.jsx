@@ -42,9 +42,9 @@ export default function PayForSeminarPage() {
     const selectedPurpose = e.target.value;
     let autoAmount = "";
 
-    if (selectedPurpose === "Seminar A") {
-      autoAmount = "100";
-    } else if (selectedPurpose === "Seminar B") {
+    if (selectedPurpose === "faculty") {
+      autoAmount = "500";
+    } else if (selectedPurpose === "student") {
       autoAmount = "200";
     }
 
@@ -175,8 +175,8 @@ export default function PayForSeminarPage() {
               className={errors.purpose ? "error" : ""}
             >
               <option value="">-- Select Purpose --</option>
-              <option value="Seminar A">Seminar A</option>
-              <option value="Seminar B">Seminar B</option>
+              <option value="faculty">Faculty/Academian</option>
+              <option value="student">Research Scholar/ Student</option>
             </select>
             {errors.purpose && (
               <span className="pay-error">{errors.purpose}</span>
