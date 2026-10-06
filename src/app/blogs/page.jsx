@@ -19,6 +19,7 @@ async function getBlogs() {
 
 export async function generateMetadata() {
   return {
+    title: "Blogs | Education Insights & Campus Updates | MIU Imphal",
     alternates: {
       canonical: `/blogs`,
     },

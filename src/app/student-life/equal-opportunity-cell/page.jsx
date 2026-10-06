@@ -5,6 +5,9 @@ export const metadata = {
   description:
     "MIU Equal Opportunity Cell ensures inclusive, accessible, and discrimination-free campus environment.",
   keywords: "MIU EOC, equal opportunity, diversity, inclusion, accessibility",
+  alternates: {
+    canonical: "/student-life/equal-opportunity-cell",
+  },
 };
 
 export default function EqualOpportunityCell() {

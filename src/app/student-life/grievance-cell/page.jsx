@@ -7,6 +7,9 @@ export const metadata = {
     "MIU Grievance Cell provides a transparent mechanism for addressing student and staff complaints.",
   keywords:
     "MIU grievance cell, complaint redressal, student grievances, transparency",
+  alternates: {
+    canonical: "/student-life/grievance-cell",
+  },
 };
 
 export default function GrievanceCell() {

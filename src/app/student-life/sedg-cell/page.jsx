@@ -6,6 +6,9 @@ export const metadata = {
     "MIU SEDG Cell promotes equity, dignity, and opportunity for socio-economically disadvantaged groups.",
   keywords:
     "MIU SEDG, social equity, disadvantaged groups, inclusion, financial aid",
+  alternates: {
+    canonical: "/student-life/sedg-cell",
+  },
 };
 
 export default function SEDGCell() {

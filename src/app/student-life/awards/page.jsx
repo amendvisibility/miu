@@ -6,6 +6,9 @@ export const metadata = {
     "Celebrating excellence at MIU - student awards, faculty achievements, and institutional recognitions.",
   keywords:
     "MIU awards, student achievements, faculty recognition, yogasana championships, UGC NET",
+  alternates: {
+    canonical: "/student-life/awards",
+  },
 };
 
 export default function Awards() {

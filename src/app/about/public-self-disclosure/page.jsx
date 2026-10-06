@@ -3,6 +3,13 @@ import "@/styles/IQAC.css";
 import "@/styles/SimplePage.css";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Public Self Disclosure | Manipur International University",
+  alternates: {
+    canonical: "/about/public-self-disclosure",
+  },
+};
+
 const SECTIONS = [
   {
     icon: "🏛️",

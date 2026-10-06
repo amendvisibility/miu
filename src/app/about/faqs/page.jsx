@@ -19,7 +19,7 @@ async function getFaqs() {
 export async function generateMetadata() {
   return {
     alternates: {
-      canonical: `/faqs`,
+      canonical: `/about/faqs`,
     },
   };
 }

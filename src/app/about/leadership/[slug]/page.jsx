@@ -9,9 +9,27 @@ import LeadershipDetail from "@/components/LeadershipDetail";
 //   },
 // };
 
+const LEADERSHIP_TITLES = {
+  chancellor:
+    "Chancellor | Leadership at Manipur International University",
+  "controller-of-examinations":
+    "Controller of Examinations | Leadership | MIU Imphal Manipur",
+  registrar:
+    "Registrar | Leadership at Manipur International University",
+  "vice-chancellor":
+    "Vice Chancellor of Manipur International University | MIU",
+};
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
+  const title =
+    LEADERSHIP_TITLES[decodedSlug] ||
+    LEADERSHIP_TITLES[slug] ||
+    "Manipur International University | Excellence in Education";
+
   return {
+    title,
     alternates: {
       canonical: `/about/leadership/${slug}`,
     },

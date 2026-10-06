@@ -6,6 +6,9 @@ export const metadata = {
     "MIU Project Development Cell fosters innovation for sustainable development through research-oriented projects.",
   keywords:
     "MIU project development, innovation, sustainable development, research projects, skill development",
+  alternates: {
+    canonical: "/student-life/project-development-cell",
+  },
 };
 
 export default function ProjectDevelopmentCell() {

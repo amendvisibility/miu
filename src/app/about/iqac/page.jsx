@@ -2,6 +2,13 @@ import "@/styles/AcademicCouncil.css";
 import "@/styles/IQAC.css";
 import Link from "next/link";
 
+export const metadata = {
+  title: "IQAC | Internal Quality Assurance Cell | MIU Imphal, Manipur",
+  alternates: {
+    canonical: "/about/iqac",
+  },
+};
+
 const DEFAULT = {
   title: "Internal Quality Assurance Cell (IQAC)",
   subtitle: "Manipur International University",
