@@ -59,7 +59,7 @@ const SECTIONS = [
 
       {
         label: "Skill and Vocational Programs",
-        href: "https://vocational.miu.edu.in/",
+        href: "https://miu.edu.in/",
       },
     ],
     note: "Details about eligibility, course structure and academic regulations are available on the university website.",

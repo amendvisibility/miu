@@ -138,7 +138,7 @@ export default async function Programs() {
                   school.slug === "school-of-vocational-studies" ? (
                     <a
                       href={
-                        school.externalUrl || "https://vocational.miu.edu.in/"
+                        school.externalUrl || "https://miu.edu.in/"
                       }
                       target="_blank"
                       rel="noopener noreferrer"
