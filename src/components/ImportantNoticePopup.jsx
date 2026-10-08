@@ -75,7 +75,11 @@ export default function ImportantNoticePopup() {
           <ul className="notice-fake-list">
             <li>
               <span className="fake-cross">✕</span>
-              <code>https://www.miuonline.org/</code>
+              <code>https://miuonline.com/</code>
+            </li>
+            <li>
+              <span className="fake-cross">✕</span>
+              <code>https://miuuniversity.in/</code>
             </li>
             <li>
               <span className="fake-cross">✕</span>
@@ -125,11 +129,6 @@ export default function ImportantNoticePopup() {
           </div>
         </div>
 
-        <div className="notice-actions">
-          <button className="notice-acknowledge-btn" onClick={handleClose}>
-            I Understand &amp; Close
-          </button>
-        </div>
       </div>
     </div>
   );
