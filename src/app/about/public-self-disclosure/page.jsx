@@ -196,14 +196,6 @@ const SECTIONS = [
   },
 ];
 
-export async function generateMetadata() {
-  return {
-    alternates: {
-      canonical: `/about/public-self-disclosure`,
-    },
-  };
-}
-
 export default function PublicSelfDisclosurePage() {
   return (
     <div className="ac-page">
