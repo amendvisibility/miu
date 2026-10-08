@@ -46,6 +46,10 @@ export async function POST(request) {
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://miu.edu.in";
 
+    const splitPayments = JSON.stringify({
+      "Edtech Innovate Pvt. Ltd": parseFloat(formattedAmount),
+    });
+
     const params = new URLSearchParams({
       key,
       txnid,
@@ -62,6 +66,7 @@ export async function POST(request) {
       udf3: "",
       udf4: "",
       udf5: "",
+      split_payments: splitPayments,
     });
 
     // Determine environment (production or test)
