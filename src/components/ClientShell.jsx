@@ -29,6 +29,14 @@ const StudentLoginButton = dynamic(() => import("./StudentLoginButton"), {
   loading: () => null,
 });
 
+const ImportantNoticePopup = dynamic(
+  () => import("@/components/ImportantNoticePopup"),
+  {
+    ssr: false,
+    loading: () => null,
+  },
+);
+
 // ── Shell ────────────────────────────────────────────────────────────────────
 export default function ClientShell({ children }) {
   return (
@@ -41,6 +49,7 @@ export default function ClientShell({ children }) {
         <main>{children}</main>
 
         {/* Deferred, non-critical UI — rendered after main content */}
+        <ImportantNoticePopup />
         <WhatsAppButton />
         <StudentLoginButton />
         {/* <EnquiryPopup /> */}
