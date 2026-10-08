@@ -47,7 +47,7 @@ export async function POST(request) {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://miu.edu.in";
 
     const splitPayments = JSON.stringify({
-      "Edtech Innovate Pvt. Ltd": parseFloat(formattedAmount),
+      "MIU_2": parseFloat(formattedAmount),
     });
 
     const params = new URLSearchParams({
