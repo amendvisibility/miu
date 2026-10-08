@@ -131,29 +131,14 @@ export default function DynamicPage({
                           }}
                         >
                           {item.uriLink ? (
-                            // <a
-                            //   target="_blank"
-                            //   rel="noopener noreferrer"
-                            //   style={{ textDecoration: "underline" }}
-                            //   href={item.uriLink}
-                            // >
-                            //   {item.title}
-                            // </a>
-                            // click to show alert that file does not exist
                             <a
                               target="_blank"
                               rel="noopener noreferrer"
-                              style={{ textDecoration: "underline", cursor: "pointer" }}
-                              // href={item.uriLink}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                alert("File does not exist");
-                              }}
-
+                              style={{ textDecoration: "underline" }}
+                              href={encodeURI(item.uriLink)}
                             >
                               {item.title}
                             </a>
-
                           ) : (
                             <strong>{item.title} </strong>
                           )}
