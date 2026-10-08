@@ -9,18 +9,15 @@ export default function ImportantNoticePopup() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Do not show on admin panel routes
-    if (pathname?.startsWith("/admin")) return;
-
-    // Check if dismissed in this session
-    const dismissed = sessionStorage.getItem("miu_notice_closed");
-    if (!dismissed) {
+    // Only show on the main page (homepage)
+    if (pathname === "/") {
       setIsOpen(true);
+    } else {
+      setIsOpen(false);
     }
   }, [pathname]);
 
   const handleClose = () => {
-    sessionStorage.setItem("miu_notice_closed", "true");
     setIsOpen(false);
   };
 
