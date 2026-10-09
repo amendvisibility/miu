@@ -107,6 +107,7 @@
   font-size: 0.92rem;
   line-height: 1.6;
   color: #333333;
+  text-align: center;
 }
 
 .notice-intro {
@@ -118,12 +119,14 @@
 .notice-official-box {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   background: #e8f5e9;
   border: 1.5px solid #4caf50;
   border-radius: 8px;
-  padding: 10px 14px;
-  margin-bottom: 16px;
+  padding: 10px 18px;
+  margin: 0 auto 16px;
+  max-width: fit-content;
 }
 
 .notice-check-icon {
@@ -166,6 +169,7 @@
 .notice-fake-list li {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   background: #ffebee;
   border: 1px solid #ffcdd2;
@@ -191,19 +195,23 @@
 .notice-fake-list code {
   color: #b71c1c;
   font-family: inherit;
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  text-decoration-color: #d32f2f;
   word-break: break-all;
 }
 
 .notice-alert-box {
   background: #fff8e1;
-  border-left: 4px solid #f57c00;
-  border-radius: 4px;
+  border: 1px solid #ffe082;
+  border-top: 3px solid #f57c00;
+  border-radius: 6px;
   padding: 12px 14px;
   margin-bottom: 14px;
   font-size: 0.87rem;
   color: #424242;
+  text-align: center;
 }
 
 .notice-alert-box p {
