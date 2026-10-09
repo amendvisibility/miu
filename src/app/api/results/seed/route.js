@@ -1,9 +1,15 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Result from '@/models/Result';
+import { protect } from '@/lib/auth';
 
-export async function POST() {
+export async function POST(request) {
   try {
+    const user = await protect(request);
+    if (!user) {
+      return NextResponse.json({ message: 'Not authorized' }, { status: 401 });
+    }
+
     await dbConnect();
     
     // Check if the result already exists

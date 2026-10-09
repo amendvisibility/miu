@@ -1,6 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useRouter } from 'next/navigation';
+import { AuthContext } from '@/context/AuthContext';
 import API from '@/lib/api';
 import '@/styles/AdminResults.css';
 
@@ -14,6 +16,9 @@ const EMPTY_FORM = {
 };
 
 export default function AdminResultsPage() {
+  const { user, loading: authLoading } = useContext(AuthContext);
+  const router = useRouter();
+
   const [results, setResults] = useState([]);
   const [form, setForm] = useState(EMPTY_FORM);
   const [editingId, setEditingId] = useState(null);
@@ -21,8 +26,16 @@ export default function AdminResultsPage() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    loadResults();
-  }, []);
+    if (!authLoading && !user) {
+      router.push('/admin/login');
+    }
+  }, [user, authLoading, router]);
+
+  useEffect(() => {
+    if (user) {
+      loadResults();
+    }
+  }, [user]);
 
   const loadResults = async () => {
     try {
@@ -89,6 +102,16 @@ export default function AdminResultsPage() {
     setForm(EMPTY_FORM);
     setEditingId(null);
   };
+
+  if (authLoading) {
+    return (
+      <div style={{ padding: '160px 20px', textAlign: 'center' }}>
+        Authenticating...
+      </div>
+    );
+  }
+
+  if (!user) return null;
 
   if (loading) {
     return (

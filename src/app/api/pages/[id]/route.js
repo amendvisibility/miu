@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Page from '@/models/Page';
+import { protect } from '@/lib/auth';
 
 // GET single page
 export async function GET(req, { params }) {
@@ -18,6 +19,9 @@ export async function GET(req, { params }) {
 // PUT update page
 export async function PUT(req, { params }) {
   try {
+    const user = await protect(req);
+    if (!user) return NextResponse.json({ message: 'Not authorized' }, { status: 401 });
+
     await dbConnect();
     const { id } = await params;
     const body = await req.json();
@@ -32,6 +36,9 @@ export async function PUT(req, { params }) {
 // DELETE page
 export async function DELETE(req, { params }) {
   try {
+    const user = await protect(req);
+    if (!user) return NextResponse.json({ message: 'Not authorized' }, { status: 401 });
+
     await dbConnect();
     const { id } = await params;
     const page = await Page.findByIdAndDelete(id);

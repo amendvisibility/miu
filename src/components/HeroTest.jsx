@@ -281,7 +281,7 @@ const HeroTest = ({ programs = DEFAULT_PROGRAMS }) => {
 
 
                     <Link
-                        href="/schools-test"
+                        href="/courses"
                         style={{
                             position: "relative",
                             width: "100%",

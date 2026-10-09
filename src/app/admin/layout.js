@@ -1,4 +1,4 @@
-// app/admin/layout.jsx
+import AdminAuthGuard from "@/components/admin/AdminAuthGuard";
 
 export const metadata = {
   robots: {
@@ -10,5 +10,5 @@ export const metadata = {
 export const dynamic = "force-dynamic";
 
 export default function AdminLayout({ children }) {
-  return <>{children}</>;
+  return <AdminAuthGuard>{children}</AdminAuthGuard>;
 }

@@ -1,12 +1,14 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Result from '@/models/Result';
+import { protect } from '@/lib/auth';
 
 // GET single result
 export async function GET(request, { params }) {
   try {
     await dbConnect();
-    const result = await Result.findById(params.id);
+    const { id } = await params;
+    const result = await Result.findById(id);
     if (!result) {
       return NextResponse.json({ error: 'Result not found' }, { status: 404 });
     }
@@ -20,9 +22,15 @@ export async function GET(request, { params }) {
 // PUT update result
 export async function PUT(request, { params }) {
   try {
+    const user = await protect(request);
+    if (!user) {
+      return NextResponse.json({ message: 'Not authorized' }, { status: 401 });
+    }
+
     await dbConnect();
+    const { id } = await params;
     const body = await request.json();
-    const result = await Result.findByIdAndUpdate(params.id, body, { new: true });
+    const result = await Result.findByIdAndUpdate(id, body, { new: true });
     if (!result) {
       return NextResponse.json({ error: 'Result not found' }, { status: 404 });
     }
@@ -36,8 +44,14 @@ export async function PUT(request, { params }) {
 // DELETE result
 export async function DELETE(request, { params }) {
   try {
+    const user = await protect(request);
+    if (!user) {
+      return NextResponse.json({ message: 'Not authorized' }, { status: 401 });
+    }
+
     await dbConnect();
-    const result = await Result.findByIdAndDelete(params.id);
+    const { id } = await params;
+    const result = await Result.findByIdAndDelete(id);
     if (!result) {
       return NextResponse.json({ error: 'Result not found' }, { status: 404 });
     }

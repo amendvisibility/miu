@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Page from '@/models/Page';
+import { protect } from '@/lib/auth';
 
 // GET all pages
 export async function GET() {
@@ -16,6 +17,11 @@ export async function GET() {
 // POST create new page
 export async function POST(req) {
   try {
+    const user = await protect(req);
+    if (!user) {
+      return NextResponse.json({ message: 'Not authorized' }, { status: 401 });
+    }
+
     await dbConnect();
     const body = await req.json();
     const page = await Page.create(body);

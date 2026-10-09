@@ -1,6 +1,8 @@
 "use client";
 
-import { Activity, useEffect, useState } from "react";
+import { Activity, useEffect, useState, useContext } from "react";
+import { useRouter } from "next/navigation";
+import { AuthContext } from "@/context/AuthContext";
 import API from "@/lib/api";
 import "@/styles/FaqAdmin.css";
 import toast from "react-hot-toast";
@@ -14,11 +16,20 @@ const emptyForm = {
 export const dynamic = "force-dynamic";
 
 export default function AdminFAQ() {
+  const { user, loading: authLoading } = useContext(AuthContext);
+  const router = useRouter();
+
   const [faqs, setFaqs] = useState([]);
   const [form, setForm] = useState(emptyForm);
   const [editId, setEditId] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.push("/admin/login");
+    }
+  }, [user, authLoading, router]);
 
   const fetchFaqs = async () => {
     try {
@@ -91,6 +102,16 @@ export default function AdminFAQ() {
     setEditId(null);
     setShowForm(false);
   };
+
+  if (authLoading) {
+    return (
+      <div style={{ padding: "160px 20px", textAlign: "center" }}>
+        Authenticating...
+      </div>
+    );
+  }
+
+  if (!user) return null;
 
   return (
     <div className="faq-page">
