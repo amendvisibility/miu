@@ -121,6 +121,16 @@ const Dashboard = () => {
           </Link>
 
           <Link
+            href="/admin/database-console"
+            className="admin-card"
+            style={cardStyle}
+          >
+            <div style={{ fontSize: "3rem", marginBottom: "15px" }}>💻</div>
+            <h3>Database Console</h3>
+            <p>Run custom queries, migrations & modify records directly.</p>
+          </Link>
+
+          <Link
             href="/admin/change-password"
             className="admin-card"
             style={cardStyle}
