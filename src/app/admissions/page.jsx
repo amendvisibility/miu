@@ -33,7 +33,7 @@ export const metadata = {
   description:
     "Step-by-step guide to the admission process at MIU. Simple, transparent, and student-friendly.",
   alternates: {
-    canonical: "https://miu.edu.in/admissions/process",
+    canonical: "https://miu.edu.in/admissions",
   },
 };
 

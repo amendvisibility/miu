@@ -61,11 +61,14 @@ export async function generateMetadata({ params }) {
     },
 
     alternates: {
-      canonical: seo.canonicalUrl
-        ? seo.canonicalUrl.startsWith("http")
-          ? seo.canonicalUrl
-          : `${process.env.NEXT_PUBLIC_BASE_URL}/courses/${seo.canonicalUrl}`
-        : `${process.env.NEXT_PUBLIC_BASE_URL}/courses/${course.slug}`,
+      canonical: (() => {
+        const raw = seo.canonicalUrl
+          ? seo.canonicalUrl.startsWith("http")
+            ? seo.canonicalUrl
+            : `https://miu.edu.in/courses/${seo.canonicalUrl}`
+          : `https://miu.edu.in/courses/${course.slug}`;
+        return raw.replace("https://www.miu.edu.in", "https://miu.edu.in");
+      })(),
     },
   };
 }
