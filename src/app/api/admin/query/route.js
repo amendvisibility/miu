@@ -36,27 +36,28 @@ export async function POST(request) {
       },
     });
 
-    let trimmed = query.trim();
-    let executableCode = trimmed;
+    let trimmed = query.trim().replace(/;+\s*$/, "");
+    const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+    let runner;
 
-    // If user didn't write an explicit 'return', handle automatic return
-    if (!/^\s*return\b/m.test(executableCode)) {
-      const lines = executableCode.split("\n").filter((l) => l.trim().length > 0);
-      if (lines.length === 1) {
-        const withoutSemi = executableCode.replace(/;+\s*$/, "");
-        executableCode = `return (${withoutSemi});`;
-      } else {
-        // Multi-line: if the last statement doesn't have return, prepend return to the last non-empty statement
-        const lastLine = lines[lines.length - 1].trim();
-        if (!lastLine.startsWith("return ")) {
-          lines[lines.length - 1] = `return (${lastLine.replace(/;+\s*$/, "")});`;
-          executableCode = lines.join("\n");
-        }
+    // 1. If user explicitly provided a `return`, execute as-is
+    if (/^\s*return\b/m.test(query)) {
+      runner = new AsyncFunction("db", "mongoose", query);
+    } else {
+      // 2. Try wrapping the entire query expression in `return (...)`
+      // This correctly handles single and multi-line statements like `await db.courses.updateMany(...)`
+      try {
+        runner = new AsyncFunction("db", "mongoose", `return (${trimmed});`);
+      } catch (parseErr) {
+        // 3. If wrapping threw a SyntaxError (e.g. multi-statement with const/let/var),
+        // execute statements sequentially and return a success message
+        runner = new AsyncFunction(
+          "db",
+          "mongoose",
+          `${query};\nreturn "Executed successfully (no return value)";`
+        );
       }
     }
-
-    const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
-    const runner = new AsyncFunction("db", "mongoose", executableCode);
 
     const startTime = Date.now();
     let result = await runner(dbProxy, mongoose);
