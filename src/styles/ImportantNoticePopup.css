@@ -254,6 +254,20 @@
   margin: 0 0 12px;
 }
 
+.notice-contact {
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333333;
+  margin: 6px 0 10px;
+}
+
+.notice-contact a {
+  color: #b71c1c;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
 .notice-footer-authority {
   text-align: center;
   font-weight: 800;
@@ -380,6 +394,11 @@
     line-height: 1.28;
     padding-top: 5px;
     margin: 0 0 5px;
+  }
+  .notice-contact {
+    font-size: 0.70rem;
+    margin: 3px 0 4px;
+    line-height: 1.3;
   }
   .notice-footer-authority {
     font-size: 0.72rem;

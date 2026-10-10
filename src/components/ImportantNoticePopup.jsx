@@ -144,6 +144,11 @@ export default function ImportantNoticePopup() {
             or persons.
           </p>
 
+          <p className="notice-contact">
+            For any concern or query, contact us on{" "}
+            <a href="mailto:info@miu.edu.in">info@miu.edu.in</a>
+          </p>
+
           <div className="notice-footer-authority">
             MANIPUR INTERNATIONAL UNIVERSITY
           </div>
