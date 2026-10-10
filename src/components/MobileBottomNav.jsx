@@ -174,7 +174,7 @@ const MobileBottomNav = () => {
           </svg>
         </a>
 
-        <a href="tel:+919319727766" className="nav-item" aria-label="Call Us">
+        <a href="tel:+919315515500" className="nav-item" aria-label="Call Us">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -191,7 +191,7 @@ const MobileBottomNav = () => {
         </a>
 
         <a
-          href="https://wa.me/919319727766"
+          href="https://wa.me/919315515500"
           target="_blank"
           rel="noopener noreferrer"
           className="nav-item"

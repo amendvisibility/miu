@@ -1,7 +1,7 @@
 import "@/styles/WhatsAppButton.css";
 
 export default function WhatsAppButton() {
-  const phoneNumber = "919319727766"; // WhatsApp number without + or spaces
+  const phoneNumber = "919315515500"; // WhatsApp number without + or spaces
 
   return (
     <a

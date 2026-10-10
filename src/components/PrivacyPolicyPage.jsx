@@ -148,7 +148,7 @@ export default function PrivacyPolicyPage() {
                 </div>
                 <div className="contact-item">
                   <span className="contact-icon">📞</span>
-                  <a href="tel:+919319727766">+91 9319727766</a>
+                  <a href="tel:+919315515500">+91 9315515500</a>
                 </div>
               </div>
             </div>

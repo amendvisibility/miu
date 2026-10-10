@@ -66,7 +66,7 @@ export default function Awards() {
         description:
           "For award nominations or queries about the awards program, please contact us.",
         email: "support@miu.edu.in",
-        phone: "+91 9319727766",
+        phone: "+91 9315515500",
       }}
     />
   );

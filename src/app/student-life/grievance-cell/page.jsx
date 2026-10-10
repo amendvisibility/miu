@@ -166,7 +166,7 @@ export default function GrievanceCell() {
         description:
           "For submitting grievances or queries about the redressal process.",
         email: "miugrievance@miu.edu.in",
-        phone: "+91 9319727766",
+        phone: "+91 9315515500",
       }}
     />
   );

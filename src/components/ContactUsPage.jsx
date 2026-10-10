@@ -69,9 +69,9 @@ export default function ContactUsPage() {
         </svg>
       ),
       title: "Phone",
-      primary: pc.phone1 || "+91 9319727766",
+      primary: pc.phone1 || "+91 9315515500",
       secondary: "Mon-Sat, 9:30 AM - 4:30 PM",
-      link: `tel:${(pc.phone1 || "+919319727766").replace(/\s/g, "")}`,
+      link: `tel:${(pc.phone1 || "+919315515500").replace(/\s/g, "")}`,
       color: "#007AFF",
       bgColor: "#E3F2FD",
     },
@@ -88,9 +88,9 @@ export default function ContactUsPage() {
         </svg>
       ),
       title: "WhatsApp",
-      primary: "+91 9319727766",
+      primary: "+91 9315515500",
       secondary: "",
-      link: "https://wa.me/919319727766",
+      link: "https://wa.me/919315515500",
       color: "#25D366",
       bgColor: "#E8F5E9",
     },
