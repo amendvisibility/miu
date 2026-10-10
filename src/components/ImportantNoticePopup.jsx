@@ -88,6 +88,29 @@ export default function ImportantNoticePopup() {
             </li>
           </ul>
 
+          <p className="notice-warning-intro">
+            Additionally, the following groups/entities are <strong>strictly unauthorized and not affiliated</strong> with Manipur International University in any manner:
+          </p>
+
+          <ul className="notice-fake-list notice-groups-grid">
+            <li>
+              <span className="fake-cross">✕</span>
+              <strong className="notice-group-name">IITS</strong>
+            </li>
+            <li>
+              <span className="fake-cross">✕</span>
+              <strong className="notice-group-name">EDTECH INNOVATE</strong>
+            </li>
+            <li>
+              <span className="fake-cross">✕</span>
+              <strong className="notice-group-name">EDUMENTORA</strong>
+            </li>
+            <li>
+              <span className="fake-cross">✕</span>
+              <strong className="notice-group-name">MEDUGARE</strong>
+            </li>
+          </ul>
+
           <div className="notice-alert-box">
             <p>
               It has come to the notice of the University Management that certain

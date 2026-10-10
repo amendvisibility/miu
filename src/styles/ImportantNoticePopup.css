@@ -202,6 +202,19 @@
   word-break: break-all;
 }
 
+.notice-groups-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 0 0 16px;
+}
+
+.notice-group-name {
+  color: #b71c1c;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
 .notice-alert-box {
   background: #fff8e1;
   border: 1px solid #ffe082;
@@ -227,7 +240,7 @@
 }
 
 .notice-alert-box a {
-  color: #e65100;
+  color: #1b5e20;
   font-weight: 700;
   text-decoration: underline;
 }
@@ -277,20 +290,103 @@
 }
 
 @media (max-width: 600px) {
+  .notice-overlay {
+    padding: 8px;
+  }
   .notice-modal {
-    max-height: 94vh;
+    max-height: 98vh;
+    border-radius: 10px;
+    width: 100%;
   }
   .notice-header {
-    padding: 18px 20px;
+    padding: 10px 14px;
+    border-bottom: 2px solid #ffc107;
+  }
+  .notice-badge {
+    font-size: 0.62rem;
+    padding: 2px 7px;
+    margin-bottom: 3px;
+    letter-spacing: 0.5px;
   }
   .notice-header h2 {
-    font-size: 1.25rem;
+    font-size: 1.05rem;
+    letter-spacing: 0.3px;
+  }
+  .notice-close-btn {
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    font-size: 0.95rem;
   }
   .notice-body {
-    padding: 16px 18px 12px;
-    font-size: 0.86rem;
+    padding: 10px 14px 10px;
+    font-size: 0.74rem;
+    line-height: 1.38;
+  }
+  .notice-intro {
+    font-size: 0.74rem;
+    margin: 0 0 6px;
+    line-height: 1.35;
+  }
+  .notice-official-box {
+    padding: 5px 10px;
+    margin: 0 auto 7px;
+    gap: 6px;
+  }
+  .notice-official-box a {
+    font-size: 0.82rem;
+  }
+  .notice-check-icon {
+    width: 17px;
+    height: 17px;
+    font-size: 0.68rem;
+  }
+  .notice-warning-intro {
+    font-size: 0.72rem;
+    margin: 0 0 4px;
+    line-height: 1.35;
+  }
+  .notice-fake-list {
+    gap: 3px;
+    margin: 0 0 6px;
+  }
+  .notice-fake-list li {
+    padding: 3px 8px;
+    font-size: 0.70rem;
+    gap: 6px;
+  }
+  .fake-cross {
+    width: 15px;
+    height: 15px;
+    font-size: 0.62rem;
+  }
+  .notice-groups-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    margin: 0 0 7px;
+  }
+  .notice-alert-box {
+    padding: 6px 9px;
+    margin-bottom: 7px;
+    font-size: 0.70rem;
+    line-height: 1.32;
+  }
+  .notice-alert-box p {
+    margin: 0 0 4px;
+  }
+  .notice-disclaimer {
+    font-size: 0.62rem;
+    line-height: 1.28;
+    padding-top: 5px;
+    margin: 0 0 5px;
+  }
+  .notice-footer-authority {
+    font-size: 0.72rem;
+    margin-top: 2px;
+    letter-spacing: 0.5px;
   }
   .notice-actions {
-    padding: 10px 18px 14px;
+    padding: 8px 14px 10px;
   }
 }
