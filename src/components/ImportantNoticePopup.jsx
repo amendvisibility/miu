@@ -4,7 +4,12 @@ import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import "@/styles/ImportantNoticePopup.css";
 
+// Temporarily disabled - set to true to re-enable
+const IS_ACTIVE = false;
+
 export default function ImportantNoticePopup() {
+  if (!IS_ACTIVE) return null;
+
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
