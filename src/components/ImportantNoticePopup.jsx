@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import "@/styles/ImportantNoticePopup.css";
 
 // Temporarily disabled - set to true to re-enable
-const IS_ACTIVE = false;
+const IS_ACTIVE = true;
 
 export default function ImportantNoticePopup() {
   if (!IS_ACTIVE) return null;
