@@ -82,7 +82,7 @@ const Footer = () => {
               </li>
 
               <li className="ugc-performa-link">
-                <Link href="/about/ugc-proforma">UGC Proforma</Link>
+                <Link href="/">UGC Proforma</Link>
               </li>
 
               <li>

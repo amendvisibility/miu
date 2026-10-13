@@ -58,7 +58,7 @@ export default async function LeadershipDetail({ leader }) {
           </div>
         </div>
 
-        <div className="other-leaders">
+        {/* <div className="other-leaders">
           <h3>Other Leadership Messages</h3>
 
           <div className="other-leaders-grid">
@@ -83,7 +83,7 @@ export default async function LeadershipDetail({ leader }) {
               </Link>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
